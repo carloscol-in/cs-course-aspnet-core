@@ -16,4 +16,4 @@ public abstract class ObjetoEscuelaBase
     {
         return $"{Nombre},{UniqueId}";
     }
-}
+}   

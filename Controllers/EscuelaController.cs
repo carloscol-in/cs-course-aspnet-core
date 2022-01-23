@@ -1,26 +1,28 @@
 using HolaMundoMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HolaMundoMVC.Controllers
+namespace HolaMundoMVC.Controllers;
+
+public class EscuelaController : Controller
 {
-    public class EscuelaController : Controller
+    private readonly ILogger<EscuelaController> _logger;
+
+    public EscuelaController(ILogger<EscuelaController> logger)
     {
-        private readonly ILogger<EscuelaController> _logger;
+        _logger = logger;
+    }
 
-        public EscuelaController(ILogger<EscuelaController> logger)
-        {
-            _logger = logger;
-        }
+    public IActionResult Index()
+    {
+        var escuela = new Escuela();
 
-        public IActionResult Index()
-        {
-            var escuela = new Escuela();
+        escuela.AnioDeCreacion = 2004;
+        escuela.Nombre = "Platzi School";
+        escuela.TipoEscuela = TiposEscuela.Secundaria;
+        escuela.Ciudad = "CDMX";
+        escuela.Pais = "Mexico";
+        escuela.Direccion = "Una direccion";
 
-            escuela.Fundacion = 2004;
-            escuela.Id = Guid.NewGuid().ToString();
-            escuela.Nombre = "Platzi School";
-
-            return View(escuela);
-        }
+        return View(escuela);
     }
 }
