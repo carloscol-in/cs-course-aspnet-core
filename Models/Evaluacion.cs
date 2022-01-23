@@ -1,8 +1,6 @@
-using System;
-
 namespace HolaMundoMVC.Models;
 
-public class Evaluación:ObjetoEscuelaBase
+public class Evaluacion : ObjetoEscuelaBase
 {
     public Alumno Alumno { get; set; }
     public Asignatura Asignatura  { get; set; }
