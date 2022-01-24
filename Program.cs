@@ -1,7 +1,15 @@
+using HolaMundoMVC.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add db context
+var serviceCollection = builder.Services.AddDbContext<EscuelaContext>(
+    options => options.UseInMemoryDatabase(databaseName: "testDB")
+);
 
 var app = builder.Build();
 
@@ -24,4 +32,25 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+var provider = serviceCollection.BuildServiceProvider();
+
+using(var scope = provider.CreateScope())
+{
+    EscuelaContext context;
+    IServiceProvider services = scope.ServiceProvider;
+
+    try
+    {
+        context = services.GetRequiredService<EscuelaContext>();
+        context.Database.EnsureCreated();
+    }
+    catch (System.Exception ex)
+    {
+        // Log the error
+        // var logger = services.GetRequiredService<ILogger>();
+        // logger.LogError(ex, "An error ocurred creating the DB.");
+    }
+}
+
+// Run app
 app.Run();

@@ -26,23 +26,23 @@ public class AsignaturaController : Controller
     public IActionResult MultiAsignatura()
     {
         List<Asignatura> asignaturas = new List<Asignatura>{
-                new Asignatura
-                {
-                    Nombre = "Matematicas"
-                },
-                new Asignatura
-                {
-                    Nombre = "Programacion"
-                },
-                new Asignatura
-                {
-                    Nombre = "Fisica"
-                },
-                new Asignatura
-                {
-                    Nombre = "Ingles"
-                },
-            };
+            new Asignatura
+            {
+                Nombre = "Matematicas"
+            },
+            new Asignatura
+            {
+                Nombre = "Programacion"
+            },
+            new Asignatura
+            {
+                Nombre = "Fisica"
+            },
+            new Asignatura
+            {
+                Nombre = "Ingles"
+            },
+        };
 
         return View(asignaturas);
     }
