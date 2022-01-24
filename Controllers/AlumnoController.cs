@@ -7,26 +7,28 @@ namespace HolaMundoMVC.Controllers;
 
 public class AlumnoController : Controller
 {
+    private readonly EscuelaContext _context;
     private readonly ILogger<AlumnoController> _logger;
 
-    public AlumnoController(ILogger<AlumnoController> logger)
+    public AlumnoController(
+        ILogger<AlumnoController> logger,
+        EscuelaContext context
+    )
     {
+        _context = context;
         _logger = logger;
     }
 
     public IActionResult Index()
     {
-        Alumno alumno = new Alumno
-        {
-            Nombre = "Natalia"
-        };
+        var alumno = _context.Alumnos.FirstOrDefault();
 
         return View(alumno);
     }
 
     public IActionResult MultiAlumno()
     {
-        List<Alumno> alumnos = GenerarAlumnosAlAzar(10);
+        IEnumerable<Alumno> alumnos = _context.Alumnos;
 
         return View("MultiAlumno", alumnos);
     }
