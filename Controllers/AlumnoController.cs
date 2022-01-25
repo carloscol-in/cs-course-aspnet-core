@@ -19,11 +19,22 @@ public class AlumnoController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    [Route("Alumno/Index")]
+    [Route("Alumno/Index/{id}")]
+    public IActionResult Index(string id)
     {
-        var alumno = _context.Alumnos.FirstOrDefault();
+        if (!string.IsNullOrWhiteSpace(id))
+        {
+            var alumno = _context.Alumnos.Find(id);
 
-        return View(alumno);
+            return View(alumno);
+        }
+        else
+        {
+            IEnumerable<Alumno> alumnos = _context.Alumnos;
+
+            return View("MultiAlumno", alumnos);
+        }
     }
 
     public IActionResult MultiAlumno()

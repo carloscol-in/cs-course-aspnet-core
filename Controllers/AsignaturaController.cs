@@ -19,11 +19,22 @@ public class AsignaturaController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    [Route("Asignatura/Index")]
+    [Route("Asignatura/Index/{id}")]
+    public IActionResult Index(string id)
     {
-        var asignatura = _context.Asignaturas.FirstOrDefault();
+        if(!string.IsNullOrWhiteSpace(id))
+        {
+            var asignatura = _context.Asignaturas.Find(id);
 
-        return View(asignatura);
+            return View(asignatura);
+        }
+        else
+        {
+            IEnumerable<Asignatura> asignaturas = _context.Asignaturas;
+
+            return View("MultiAsignatura", asignaturas);
+        }
     }
 
     public IActionResult MultiAsignatura()
